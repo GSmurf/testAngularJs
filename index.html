@@ -16,13 +16,13 @@
 	<div id="menu"></div>
 	<div id="content">
 		<h2>Liste des {{scenari.length}} scenari :</h2>
-		<button id="ajouter"/>Ajouter</button>
+		<!-- <button id="ajouter"/>Ajouter</button> -->
 		<form methode="post" ng-submit="ajouterScenario();">
 		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="nom"></div>
 		  <div><textarea id="description" name="description" placeholder="Description" ng-model="description"></textarea></div>
 		  <div><select id="actif" name="actif" placeholder="Actif" ng-model="actif">
-		    <option value="true">oui</option>
-		    <option value="false">non</option>
+		    <option value=true>oui</option>
+		    <option value=false>non</option>
 		  </select></div>
 		  <button type="submit" id="valider"/>Valider</button>
 		</form>
@@ -37,7 +37,7 @@
 		</ul>
 	</div>
 	<div id="footer"></div>
-  <script src="js/angular.min.js"></script>
-  <script src="js/main.js"></script>
+  <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

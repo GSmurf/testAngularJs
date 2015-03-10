@@ -2,25 +2,41 @@ var myApp = angular.module('scenari', []);
 
 myApp.controller('ScenariListCtrl', function ($scope) {
 
-  var init = function(){
-      $scope.nom = "";
-      $scope.description = "";
-      $scope.actif = true;
+  var reinitialiseForm = function(){
+      $scope.nom="";
+      $scope.description="";
+      $scope.actif=true;
+      $scope.actions=[];
   };
 
-  init();
+  reinitialiseForm();
   
   $scope.ajouterScenario = function() {
-      $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:$scope.actif, actions:[]});
-      init();
+    if($scope.actif === false)console.log($scope.actif+" "+Boolean($scope.actif));
+      $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:false, actions:[]});
+      //$scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:Boolean($scope.actif), actions:[]});
+      reinitialiseForm();
+  };
+  
+  chargeForm = function(scenario) {
+      $scope.nom = scenario.nom;
+      $scope.description = scenario.description;
+      $scope.actif = scenario.actif;
   };
 
-  $scope.remove=function(item){ 
-    var index=$scope.bdays.indexOf(item)
-    $scope.bdays.splice(index,1);     
+  $scope.remove = function(item){ 
+    var index=$scope.scenari.indexOf(item);
+    $scope.scenari.splice(index,1);     
+  };
+
+
+  $scope.editScenario = function(item){ 
+    var selectItem = $scope.scenari[$scope.scenari.indexOf(item)];
+    chargeForm(selectItem);
+    $scope.remove(item);
   }
 
-  $scope.debutDef=function(str){
+  $scope.debutDef = function(str){
     return str.description.substring(0, 10)+'...';
   };
 
