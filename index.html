@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr" ng-app="scenari" ng-controller="ScenariListCtrl">
+<head>
+  <meta charset="utf-8">
+  <title ng-bind-template="Paramétrage scenari">Mes tests AngularJs</title>
+  <style type="text/css">
+  <!--
+  .desactiver {
+  	text-decoration: line-through;  
+  }
+  -->
+  </style>
+</head>
+<body>
+	<div id="header">Scenari</div>
+	<div id="menu"></div>
+	<div id="content">
+		<h2>Liste des {{scenari.length}} scenari :</h2>
+		<button id="ajouter"/>Ajouter</button>
+		<form methode="post" ng-submit="ajouterScenario();">
+		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="nom"></div>
+		  <div><textarea id="description" name="description" placeholder="Description" ng-model="description"></textarea></div>
+		  <div><select id="actif" name="actif" placeholder="Actif" ng-model="actif">
+		    <option value="true">oui</option>
+		    <option value="false">non</option>
+		  </select></div>
+		  <button type="submit" id="valider"/>Valider</button>
+		</form>
+		<ul>
+			<li ng-repeat="scenario in scenari">
+				<span ng-class="scenario.actif==false ? 'desactiver' : ''">{{scenario.nom}} [{{debutDef(scenario)}}] ({{scenario.actions.length}} actions)</span>
+				<button id="editer" ng-click="editScenario(scenario)"/>Editer</button>
+				<button id="supprimer" ng-click="remove(scenario)"/>Supprimer</button>
+				<button id="activer" ng-show="!scenario.actif" ng-model="scenario.actif"/>Activer</button>
+				<button id="desactiver" ng-show="scenario.actif"/>Désactiver</button>
+			</li>
+		</ul>
+	</div>
+	<div id="footer"></div>
+  <script src="js/angular.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
