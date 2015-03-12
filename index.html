@@ -3,13 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title ng-bind-template="Paramétrage scenari">Mes tests AngularJs</title>
-  <style type="text/css">
-  <!--
-  .desactiver {
-  	text-decoration: line-through;  
-  }
-  -->
-  </style>
+  <link rel="stylesheet" href="css/angular-ui-switch.min.css"/>
+  <link rel="stylesheet" href="css/main.css"/>
 </head>
 <body>
 	<div id="header">Scenari</div>
@@ -20,10 +15,7 @@
 		<form methode="post" ng-submit="ajouterScenario();">
 		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="nom"></div>
 		  <div><textarea id="description" name="description" placeholder="Description" ng-model="description"></textarea></div>
-		  <div><select id="actif" name="actif" placeholder="Actif" ng-model="actif">
-		    <option value=true>oui</option>
-		    <option value=false>non</option>
-		  </select></div>
+		  <div><switch id="enabled" name="enabled" ng-model="actif" class="green"></switch>{{ actif }}</div>
 		  <button type="submit" id="valider"/>Valider</button>
 		</form>
 		<ul>
@@ -38,6 +30,7 @@
 	</div>
 	<div id="footer"></div>
   <script type="text/javascript" src="js/angular.min.js"></script>
+  <script type="text/javascript" src="js/angular-ui-switch.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

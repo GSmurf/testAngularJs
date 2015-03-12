@@ -1,4 +1,4 @@
-var myApp = angular.module('scenari', []);
+var myApp = angular.module('scenari', ['uiSwitch']);
 
 myApp.controller('ScenariListCtrl', function ($scope) {
 
@@ -12,8 +12,7 @@ myApp.controller('ScenariListCtrl', function ($scope) {
   reinitialiseForm();
   
   $scope.ajouterScenario = function() {
-    if($scope.actif === false)console.log($scope.actif+" "+Boolean($scope.actif));
-      $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:false, actions:[]});
+      $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:$scope.actif, actions:[]});
       //$scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:Boolean($scope.actif), actions:[]});
       reinitialiseForm();
   };
