@@ -2,7 +2,7 @@
 Tests d'angular pour mon switch
 Pour la génération du json utilisé utiliser ce lien : http://www.objgen.com/json/models/lOH
 
-Todo
+### Todo :
 - Pour remplacer les switchs jquery mobile je peux utiliser en angularJs : https://github.com/xpepermint/angular-ui-switch
 - Charger la configuration en cours via un fichier js chargé par le code
 - Coté serveur, généré ce fichier js à l'utilisation des appel ajax et retourner une réponse js
