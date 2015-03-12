@@ -1,0 +1,22 @@
+.desactiver {
+    text-decoration: line-through;  
+}
+input, textarea{
+    width : 250px;
+}
+
+/* Switch */
+.switch {
+  /* frame */
+}
+.switch small {
+  /* button */
+}
+.switch.checked {
+  /* frame when enabled */
+  border-color: #C6E7C5;
+  background: #C6E7C5;
+}
+.switch.checked small {
+  /* button when enabled */
+}
