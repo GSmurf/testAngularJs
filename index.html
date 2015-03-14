@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title ng-bind-template="Paramétrage scenari">Mes tests AngularJs</title>
-  <link rel="stylesheet" href="css/angular-ui-switch.min.css"/>
+  <link rel="stylesheet" href="node_modules/angular-ui-switch/angular-ui-switch.min.css"/>
   <link rel="stylesheet" href="css/main.css"/>
 </head>
 <body>
@@ -15,7 +15,7 @@
 		<form methode="post" ng-submit="ajouterScenario();">
 		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="nom"></div>
 		  <div><textarea id="description" name="description" placeholder="Description" ng-model="description"></textarea></div>
-		  <div><switch id="enabled" name="enabled" ng-model="actif" class="green"></switch>{{ actif }}</div>
+		  <div><switch id="enabled" name="enabled" ng-model="actif" on="On" off="Off" class="green"></switch></div>
 		  <button type="submit" id="valider"/>Valider</button>
 		</form>
 		<ul>
@@ -23,14 +23,14 @@
 				<span ng-class="scenario.actif==false ? 'desactiver' : ''">{{scenario.nom}} [{{debutDef(scenario)}}] ({{scenario.actions.length}} actions)</span>
 				<button id="editer" ng-click="editScenario(scenario)"/>Editer</button>
 				<button id="supprimer" ng-click="remove(scenario)"/>Supprimer</button>
-				<button id="activer" ng-show="!scenario.actif" ng-model="scenario.actif"/>Activer</button>
-				<button id="desactiver" ng-show="scenario.actif"/>Désactiver</button>
+				<button id="activer" ng-show="!scenario.actif" ng-click="toggleActif(scenario)"/>Activer</button>
+				<button id="desactiver" ng-show="scenario.actif" ng-click="toggleActif(scenario)"/>Désactiver</button>
 			</li>
 		</ul>
 	</div>
 	<div id="footer"></div>
   <script type="text/javascript" src="js/angular.min.js"></script>
-  <script type="text/javascript" src="js/angular-ui-switch.min.js"></script>
+  <script type="text/javascript" src="node_modules/angular-ui-switch/angular-ui-switch.min.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

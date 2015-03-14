@@ -2,25 +2,28 @@ var myApp = angular.module('scenari', ['uiSwitch']);
 
 myApp.controller('ScenariListCtrl', function ($scope) {
 
-  var reinitialiseForm = function(){
+  $scope.reinitialiseForm = function(){
       $scope.nom="";
       $scope.description="";
       $scope.actif=true;
       $scope.actions=[];
   };
 
-  reinitialiseForm();
+  $scope.reinitialiseForm();
   
   $scope.ajouterScenario = function() {
       $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:$scope.actif, actions:[]});
-      //$scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:Boolean($scope.actif), actions:[]});
-      reinitialiseForm();
+      $scope.reinitialiseForm();
   };
   
-  chargeForm = function(scenario) {
+  $scope.chargeForm = function(scenario) {
       $scope.nom = scenario.nom;
       $scope.description = scenario.description;
       $scope.actif = scenario.actif;
+  };
+
+  $scope.toggleActif = function(scenario) {
+    scenario.actif = !scenario.actif;
   };
 
   $scope.remove = function(item){ 
@@ -31,7 +34,7 @@ myApp.controller('ScenariListCtrl', function ($scope) {
 
   $scope.editScenario = function(item){ 
     var selectItem = $scope.scenari[$scope.scenari.indexOf(item)];
-    chargeForm(selectItem);
+    $scope.chargeForm(selectItem);
     $scope.remove(item);
   }
 

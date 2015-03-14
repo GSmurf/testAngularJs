@@ -2,6 +2,9 @@
 Tests d'angular pour mon switch
 Pour la génération du json utilisé utiliser ce lien : http://www.objgen.com/json/models/lOH
 
+## Instalation :
+- lancer npm install angular-ui-switch
+
 ## Todo :
 - Charger la configuration en cours via un fichier js chargé par le code
 - Coté serveur, généré ce fichier js à l'utilisation des appel ajax et retourner une réponse js
