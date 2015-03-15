@@ -2,24 +2,24 @@ var myApp = angular.module('scenari', ['uiSwitch']);
 
 myApp.controller('ScenariListCtrl', function ($scope) {
 
-  $scope.reinitialiseForm = function(){
-      $scope.nom="";
-      $scope.description="";
-      $scope.actif=true;
-      $scope.actions=[];
-  };
+  $scope.newScenario = {nom:'', description:'', actif:true, actions:[]};
 
-  $scope.reinitialiseForm();
+  $scope.reinitialiseForm = function(){
+        $scope.newScenario = {nom:'', description:'', actif:true, actions:[]};
+  };
   
   $scope.ajouterScenario = function() {
-      $scope.scenari.push({nom:$scope.nom, description:$scope.description, actif:$scope.actif, actions:[]});
+      $scope.scenari.push($scope.newScenario);
       $scope.reinitialiseForm();
   };
   
   $scope.chargeForm = function(scenario) {
-      $scope.nom = scenario.nom;
-      $scope.description = scenario.description;
-      $scope.actif = scenario.actif;
+      $scope.newScenario = scenario;
+  };
+
+  $scope.supprimerAction = function(action) {
+    var index=$scope.newScenario.actions.indexOf(action);
+    $scope.newScenario.actions.splice(index,1);  
   };
 
   $scope.toggleActif = function(scenario) {
@@ -33,14 +33,24 @@ myApp.controller('ScenariListCtrl', function ($scope) {
 
 
   $scope.editScenario = function(item){ 
-    var selectItem = $scope.scenari[$scope.scenari.indexOf(item)];
-    $scope.chargeForm(selectItem);
+    $scope.newScenario = $scope.scenari[$scope.scenari.indexOf(item)];
+    // $scope.chargeForm(selectItem);
     $scope.remove(item);
   }
 
   $scope.debutDef = function(str){
-    return str.description.substring(0, 10)+'...';
+    var limite = 40;
+    var mess = str.description.substring(0, limite);
+    if(str.description.length >= limite){
+      mess = mess+'...';
+    }
+    
+    return mess;
   };
+
+  //$scope.scenari = $http.get('js/scenari.json');
+  //alert($http.get('./js/scenari.json')); // TODO : http://goo.gl/AvFXxu
+
 
   $scope.scenari = [{
         "nom": "scenario 1",

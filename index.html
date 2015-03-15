@@ -13,14 +13,22 @@
 		<h2>Liste des {{scenari.length}} scenari :</h2>
 		<!-- <button id="ajouter"/>Ajouter</button> -->
 		<form methode="post" ng-submit="ajouterScenario();">
-		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="nom"></div>
-		  <div><textarea id="description" name="description" placeholder="Description" ng-model="description"></textarea></div>
-		  <div><switch id="enabled" name="enabled" ng-model="actif" on="On" off="Off" class="green"></switch></div>
-		  <button type="submit" id="valider"/>Valider</button>
+		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="newScenario.nom"></div>
+		  <div><textarea id="description" name="description" placeholder="Description" ng-model="newScenario.description"></textarea></div>
+		  <div><switch id="enabled" name="enabled" ng-model="newScenario.actif" on="On" off="Off" class="green"></switch></div>
+		  <div>Actions : <button type="submit" id="ajouter"/>Ajouter</button></div>
+		  <ul>
+		    <li ng-repeat="action in newScenario.actions">
+		    	{{action.type}} : <input ng-model="action.value">
+		    	<input ng-show="action.id" ng-model="action.id">
+		    	<button type="submit" id="supprimerAction" ng-click="supprimerAction(action)"/>Supprimer</button>
+		    </li>
+		  </ul>
+		  <div><button type="submit" id="valider"/>Valider</button></div>
 		</form>
 		<ul>
 			<li ng-repeat="scenario in scenari">
-				<span ng-class="scenario.actif==false ? 'desactiver' : ''">{{scenario.nom}} [{{debutDef(scenario)}}] ({{scenario.actions.length}} actions)</span>
+				<span ng-class="scenario.actif==false ? 'desactiver' : ''">{{scenario.nom}} ({{scenario.actions.length}} actions), {{debutDef(scenario)}}</span>
 				<button id="editer" ng-click="editScenario(scenario)"/>Editer</button>
 				<button id="supprimer" ng-click="remove(scenario)"/>Supprimer</button>
 				<button id="activer" ng-show="!scenario.actif" ng-click="toggleActif(scenario)"/>Activer</button>
