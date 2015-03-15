@@ -1,0 +1,65 @@
+[{
+    "nom": "scenario 1",
+    "description": "deux switch on et un off puis message de fin",
+    "actif": true,
+    "actions": [{
+          "type": "switch",
+          "value": "on",
+          "id": "1"
+        },
+        {
+          "type": "switch",
+          "value": "off",
+          "id": "2"
+        },
+        {
+          "type": "switch",
+          "value": "on",
+          "id": "3"
+        },
+        {
+          "type": "timer",
+          "value": "2000"
+        },
+        {
+          "type": "message",
+          "value": "2 switch ON 1 OFF !"
+        }
+    ]
+  },
+  {
+    "nom": "scenario 2",
+    "description": "Test desactivé",
+    "actif": false,
+    "actions": [{
+          "type": "message",
+          "value": "Désactivé..."
+        }
+    ]
+  },
+  {
+    "nom": "scenario 3",
+    "description": "All ON",
+    "actif": true,
+    "actions": [{
+          "type": "switch",
+          "value": "on",
+          "id": "1"
+        },
+        {
+          "type": "switch",
+          "value": "on",
+          "id": "2"
+        },
+        {
+          "type": "switch",
+          "value": "on",
+          "id": "3"
+        },
+        {
+          "type": "message",
+          "value": "All ON Dude !!!"
+        }
+    ]
+  }
+];
