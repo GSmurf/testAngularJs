@@ -1,44 +1,60 @@
 <!doctype html>
-<html lang="fr" ng-app="scenari" ng-controller="ScenariListCtrl">
+<html lang="fr" ng-app="scenari">
 <head>
   <meta charset="utf-8">
   <title ng-bind-template="Paramétrage scenari">Mes tests AngularJs</title>
   <link rel="stylesheet" href="node_modules/angular-ui-switch/angular-ui-switch.min.css"/>
   <link rel="stylesheet" href="css/main.css"/>
 </head>
-<body>
+<body ng-controller="ScenariListCtrl">
 	<div id="header">Scenari</div>
 	<div id="menu"></div>
 	<div id="content">
-		<h2>Liste des {{scenari.length}} scenari :</h2>
-		<!-- <button id="ajouter"/>Ajouter</button> -->
+		<h2>Ajout de scénario :</h2>
 		<form methode="post" ng-submit="ajouterScenario();">
 		  <div><input id="nom" name="nom" placeholder="Nom" ng-model="newScenario.nom"></div>
 		  <div><textarea id="description" name="description" placeholder="Description" ng-model="newScenario.description"></textarea></div>
-		  <div><switch id="enabled" name="enabled" ng-model="newScenario.actif" on="On" off="Off" class="green"></switch></div>
-		  <div>Actions : <button type="submit" id="ajouter"/>Ajouter</button></div>
-		  <ul>
-		    <li ng-repeat="action in newScenario.actions">
-		    	{{action.type}} : <input ng-model="action.value">
-		    	<input ng-show="action.id" ng-model="action.id">
-		    	<button type="submit" id="supprimerAction" ng-click="supprimerAction(action)"/>Supprimer</button>
-		    </li>
-		  </ul>
-		  <div><button type="submit" id="valider"/>Valider</button></div>
+		  <div>Actif : <switch id="enabled" name="enabled" ng-model="newScenario.actif" on="On" off="Off" class="green"></switch></div> 
+		  <div class="typeActions">
+			<h3>Type Actions</h3>
+			<div>
+			  <ul>
+				<li ng-repeat='item in list1' ng-show="item.type" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="list1" jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">{{item.type}}</li>
+			  </ul>
+			</div>
+          </div>
+          <div class="actionsSelect">
+			<h3 class="ui-widget-header">Liste d'actions <span ng-show="newScenario.actions.length">{{newScenario.actions.length}} actions</span></h3>
+			<div class="ui-widget-content">
+				<ol data-drop="true" ng-model='newScenario.actions' jqyoui-droppable="{multiple:true}">
+					<li class="placeholder" ng-hide="hideMe()">Ajouter les actions ici.</li>
+					<li ng-repeat="action in newScenario.actions track by $index" ng-show="action.type" data-drag="true" data-jqyoui-options="{revert: 'invalid', helper: 'clone'}" ng-model="newScenario.actions" jqyoui-draggable="{index: {{$index}},animate:true}">
+						{{action.type}} : <input ng-model="action.value">
+						<input ng-show="action.type == 'switch'" ng-model="action.id">
+						<button type="button" id="supprimerAction" ng-click="supprimerAction(action)"/>Supprimer</button>
+					</li>
+				</ol>
+			</div>
+          </div>
+		  <div class="clear"><button type="submit" id="valider"/>Valider</button></div>
 		</form>
+		<h2>Liste des {{scenari.length}} scenari :</h2>
 		<ul>
 			<li ng-repeat="scenario in scenari">
 				<span ng-class="scenario.actif==false ? 'desactiver' : ''">{{scenario.nom}} ({{scenario.actions.length}} actions), {{debutDef(scenario)}}</span>
-				<button id="editer" ng-click="editScenario(scenario)"/>Editer</button>
-				<button id="supprimer" ng-click="remove(scenario)"/>Supprimer</button>
-				<button id="activer" ng-show="!scenario.actif" ng-click="toggleActif(scenario)"/>Activer</button>
-				<button id="desactiver" ng-show="scenario.actif" ng-click="toggleActif(scenario)"/>Désactiver</button>
+				<button type="button" id="editer" ng-click="editScenario(scenario)"/>Editer</button>
+				<button type="button" id="supprimer" ng-click="remove(scenario)"/>Supprimer</button>
+				<button type="button" id="activer" ng-show="!scenario.actif" ng-click="toggleActif(scenario)"/>Activer</button>
+				<button type="button" id="desactiver" ng-show="scenario.actif" ng-click="toggleActif(scenario)"/>Désactiver</button>
 			</li>
 		</ul>
 	</div>
 	<div id="footer"></div>
-  <script type="text/javascript" src="js/angular.min.js"></script>
-  <script type="text/javascript" src="node_modules/angular-ui-switch/angular-ui-switch.min.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="node_modules/angular-ui-switch/angular-ui-switch.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-dragdrop/src/angular-dragdrop.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

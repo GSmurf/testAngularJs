@@ -1,7 +1,15 @@
-var myApp = angular.module('scenari', ['uiSwitch']);
+var myApp = angular.module('scenari', ['uiSwitch', 'ngDragDrop']);
+
 
 myApp.controller('ScenariListCtrl', function ($scope) {
 
+  $scope.list1 = [{"type": 'switch',"value": 'on',"id": 1}, {"type": "timer","value": 2000}, {"type": "message","value": 'Dancing to the end of love !'}];
+
+
+  $scope.hideMe = function() {
+    return $scope.newScenario.actions.length > 0;
+  }
+  
   $scope.newScenario = {nom:'', description:'', actif:true, actions:[]};
 
   $scope.reinitialiseForm = function(){
@@ -20,6 +28,10 @@ myApp.controller('ScenariListCtrl', function ($scope) {
   $scope.supprimerAction = function(action) {
     var index=$scope.newScenario.actions.indexOf(action);
     $scope.newScenario.actions.splice(index,1);  
+  };
+
+  $scope.ajouterAction = function() {
+    $scope.newScenario.actions.push({"type": "switch","value": "on","id": "1"}); 
   };
 
   $scope.toggleActif = function(scenario) {
