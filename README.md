@@ -4,6 +4,7 @@ Pour la génération du json utilisé utiliser ce lien : http://www.objgen.com/j
 
 ## Instalation :
 - lancer npm install angular-ui-switch
+- bower install angular-ui-switch
 
 ## Todo :
 - Charger la configuration en cours via un fichier js chargé par le code
